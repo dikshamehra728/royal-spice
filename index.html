@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <META NAME="VIEWPORT"
+    Content="width=device-width,
+    initial-scale=1.0">
+    <title>Royal spice restaurant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="themeButton">Change Theme</button>
+  <header>
+    <h1 id="restaurant-name">Royal spice restaurant</h1>
+    <nav>
+      <button id="menuButton" aria-label="Open navigation" aria-expanded="false">&#9776</button>
+      <div class="nav-links">
+        <a href="#">home</a>
+        <a href="#">menu</a>
+        <a href="#">booking</a>
+        <a href="#">reviews</a>
+        <a href="#">contact</a>
+      </div>
+      <li class="dropdown">
+        <button class="dropdown-btn">
+        Menu
+        <span>&#8964;</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#Starters"> Starters</a></li>
+        <li><a href="main-course">Main course</a></li>
+        <li><a href="#desserts"> Desserts</a></li>
+      </ul>  
+    </li>
+      </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+      <p class="hero-label">WELCOME TO ROYAL SPICE</p>
+    <h2>delicious food, crafted with passion</h2>
+      <p class="hero-description">
+        Experience authentic flavours, fresh ingridients, and a peaceful dining atmosphere made for memorable moments.
+      </p>
+      <a href="menu" class="btn hero-btn">Explore Our Menu</a>
+    </div>
+      <div class="hero-image">
+      <img src="images/restaurant.jpg" alt="royal spice restaurant">
+    </div>
+    </section>
+    <section id="menu" class="menu-section">
+  <p class="section-label">CULINARY SELECTION</p>
+  <h2>Our Menu</h2>
+  <p class="menu-intro">
+    Thoughtfully crafted dishes made with fresh ingredients and authentic flavours.
+  </p>
+  <div class="tabs">
+    <button class="tab-button active">Starters</button>
+    <button class="tab-button">Main Course</button>
+    <button class="tab-button">Desserts</button>
+  </div>
+  <div class="tab-content active">
+    <ul>
+      <li>
+        <div class="dish-info">
+          <span>Paneer Tikka</span>
+          <p>Char-grilled cottage cheese with aromatic spices and mint.</p>
+        </div>
+        <strong>₹220</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Veg Seekh Kebab</span>
+          <p>Spiced vegetable kebabs grilled with fresh herbs.</p>
+        </div>
+        <strong>₹200</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Hara Bhara Kebab</span>
+          <p>Spinach and green-pea kebabs with delicate Indian spices.</p>
+        </div>
+        <strong>₹180</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Cheese Garlic Bread</span>
+          <p>Toasted garlic bread finished with melted cheese.</p>
+        </div>
+        <strong>₹160</strong>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <ul>
+      <li>
+        <div class="dish-info">
+          <span>Paneer Butter Masala</span>
+          <p>Silken paneer in a rich tomato, butter and cream sauce.</p>
+        </div>
+        <strong>₹280</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Dal Makhani</span>
+          <p>Slow-cooked black lentils finished with butter and cream.</p>
+        </div>
+        <strong>₹220</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Vegetable Biryani</span>
+          <p>Fragrant basmati rice layered with seasonal vegetables and spices.</p>
+        </div>
+        <strong>₹240</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Garlic Naan</span>
+          <p>Soft tandoor-baked naan topped with garlic and fresh coriander.</p>
+        </div>
+        <strong>₹80</strong>
+      </li>
+    </ul>
+  </div>
+
+  
+  <div class="tab-content">
+    <ul>
+      <li>
+        <div class="dish-info">
+          <span>Gulab Jamun</span>
+          <p>Soft milk dumplings served warm in fragrant sugar syrup.</p>
+        </div>
+        <strong>₹120</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Rasmalai</span>
+          <p>Soft cottage-cheese dumplings soaked in saffron milk.</p>
+        </div>
+        <strong>₹150</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Kesar Kulfi</span>
+          <p>Traditional saffron-infused Indian ice cream with pistachios.</p>
+        </div>
+        <strong>₹140</strong>
+      </li>
+
+      <li>
+        <div class="dish-info">
+          <span>Chocolate Brownie</span>
+          <p>Rich chocolate brownie with a warm, fudgy centre.</p>
+        </div>
+        <strong>₹180</strong>
+      </li>
+    </ul>
+  </div>
+</section>
+    <section id="booking" class="booking-section">
+      <div class="booking-content">
+          <p class="booking-label">RESERVE YOUR TABLE</p>
+          <h2>Book your dining experience</h2>
+          <p>
+            Reserve your table and enjoy delicious food in a comfortable and welcoming atmosphere.
+          </p>
+      </div>
+      <form class="booking-form">
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="enter your name"
+        required
+        >
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        required
+        >
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input
+        type="date"
+        id="date"
+        name="date"
+        required
+        >
+      </div>
+      <div class="form-group">
+        <label for="guests">Number of guests</label>
+        <input
+        type="number"
+        id="guests"
+        name="guests"
+        min="1"
+        max="20"
+        placeholder="Number of guests"
+        required
+        >
+      </div>
+      <button type="submit"  class="btn booking-btn" id="bookingBtn">Book a table</button>
+    </form> 
+    </section>
+    <section class="reviews-section">
+      <p class="reviews-label">WHAT OUR GUESTS SAY</p>
+      <h2>customer reviews</h2>
+      <div class="reviews-grid">
+      <article>
+        <p>"Amazing food and peaceful atmosphere."</p>
+      </article>
+      <article>
+        <p>"excellent customer service and delicious dishes."</p>
+      </article>
+      </div>
+    </section>
+    <section class="Faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-items">
+        <button class="faq-question">
+          What are your opening hours?
+        </button>
+        <div class="faq-answer">
+          We are open from 11 AM to 11 PM everyday.
+        </div>
+      </div>
+      <div class="faq-items">
+        <button class="faq-question">
+          Do you accept reservations?
+        </button>
+      <div class="faq-answer">
+          Yes, you can reserve a table through our booking section." 
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>
+      &copy2026 Royal spice Restaurant /all rights reserved
+    </p>
+  </footer>
+  <div class="modal">
+    <div class="modal-content">
+      <h2>Booking Started!</h2>
+      <p> Thank you for choosing Royal Spice.</p>
+      <button class="class-modal">Close</button>
+    </div>
+  </div> 
+  <script src="script.js"></script>
+</body>
+</html>
