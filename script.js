@@ -1,3 +1,4 @@
+import { formatPrice } from "./utils.js";
 const bookingButton= document.getElementById("bookingBtn");
 const modal=document.querySelector(".modal");
 const closeModal=document.querySelector(".class-modal");
@@ -96,3 +97,71 @@ document.addEventListener("keydown",function(event) {
         bookingButton.textContent=" Book a table";
     }
 });
+//===============================================
+// DAY 11 -MODERN JAVASCRIPT
+//===============================================
+function showMessage(name) {
+    console.log (`Welcome to ${name}!`);
+}
+setTimeout(() => {
+    showMessage("Royal Spice");
+},2000);    
+const testButton =document.querySelector("#themeButton");
+testButton.addEventListener("click", (event) => {
+    console.log(`you clicked: ${event.target.id}`);
+});
+const menuItems= [
+    {
+        name:"Paneer Tikka",
+        price:320,
+        description: "char-grilled cottage cheese with aromatic spices and mint."
+    } ,
+    {
+        name: "dal makhani",
+        price: 300,
+        description:"slow-cooked black lentils finished with butter and cream."
+    } ,
+    {
+        name: "Malai Tikka",
+        price: 320,
+        description: "Tender cottage cheese marinated with creamy spices and herbs."
+    }
+];
+const startersMenu= document.querySelector("#startersMenu");
+console.log(startersMenu);
+startersMenu.innerHTML="";
+const startersList = document.createElement("ul");
+startersMenu.appendChild(startersList);
+function renderDish(item,list) {
+    const li = document.createElement("li");
+    li.dataset.dish=item.name;
+    const dishInfo=document.createElement("div");
+    dishInfo.classList.add("dish-info");
+    const dishName=document.createElement("span");
+    dishName.textContent=item.name;
+    dishInfo.appendChild (dishName);
+    const description = document.createElement("p");
+    description.textContent=item.description;
+    dishInfo.appendChild(description);
+    const price= document.createElement("strong");
+    price.textContent=`${item.price}`;
+    li.appendChild(dishInfo);
+    li.appendChild(price);
+    list.append(li);
+}
+menuItems.forEach(item=> {
+    renderDish(item, startersList);
+});
+function showSelectedDish(dish) {
+    const selectedDish= menuItems.find(item=> item.name=== dish);
+    if (!selectedDish) return;
+    selectedMessage.textContent=`you selected: ${selectedDish.name}- ₹${selectedDish.price}`;
+}
+startersList.addEventListener("click", (event) => {
+    const dishItem = event.target.closest("li");
+    if (!dishItem) return;
+    const dish= dishItem.dataset.dish;
+    showSelectedDish(dish);
+});
+const selectedMessage = document.createElement("p");
+document.body.appendChild(selectedMessage);

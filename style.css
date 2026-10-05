@@ -144,6 +144,22 @@ nav a:hover{
     grid-template-columns: repeat(2, minmax(0,1fr));
     gap: 24px;
 }
+.menu-section ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    max-width:100%;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px;
+}
+#startersMenu li.selected {
+    border:2 px solid gold;
+    transform: scale(1.02);
+}
+.menu-section.tab-content {
+    display: none;
+}
 .menu-section .tab-content {
     display:none;
     width: 100%;
