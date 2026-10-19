@@ -156,11 +156,6 @@ navItems.forEach(function(item) {
         menuButton.setAttribute("aria-expanded","false");
     })
 })     
-const dropdownBtn= document.querySelector(".dropdown-btn");
-dropdownBtn.addEventListener("click", function() { 
-   const menu=this.nextElementSibling;
-    menu.classList.toggle("show");
-});
 const faqQuestions=document.querySelectorAll(".Faq-question");
 faqQuestions.forEach(function(question) {
     question.addEventListener("click", function() {
