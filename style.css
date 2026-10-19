@@ -526,6 +526,8 @@ body.dark h2 {
     border-radius: 4px;
     box-shadow:0 8px 20px rgba(0, 0, 0, 0.25);
     z-index: 1000;
+    list-style: none;
+    margin:0;
  }
  .dropdown-menu.show {
     display:block;
