@@ -15,11 +15,11 @@
     <nav>
       <button id="menuButton" aria-label="Open navigation" aria-expanded="false">&#9776</button>
       <div class="nav-links">
-        <a href="#">home</a>
-        <a href="#">menu</a>
-        <a href="#">booking</a>
-        <a href="#">reviews</a>
-        <a href="#">contact</a>
+        <a href="#home">home</a>
+        <a href="#menu">menu</a>
+        <a href="#booking">booking</a>
+        <a href="#reviews">reviews</a>
+        <a href="#contact">contact</a>
       </div>
       <li class="dropdown">
         <button class="dropdown-btn">
@@ -37,16 +37,13 @@
   <main>
     <section class="hero">
       <div class="hero-content">
-      <p class="hero-label">WELCOME TO ROYAL SPICE</p>
-    <h2>delicious food, crafted with passion</h2>
-      <p class="hero-description">
-        Experience authentic flavours, fresh ingridients, and a peaceful dining atmosphere made for memorable moments.
-      </p>
-      <a href="menu" class="btn hero-btn">Explore Our Menu</a>
-    </div>
-      <div class="hero-image">
-      <img src="images/restaurant.jpg" alt="royal spice restaurant">
-    </div>
+        <p class="hero-label">WELCOME TO ROYAL SPICE</p>
+        <h2>delicious food, crafted with passion</h2>
+        <p class="hero-description">
+           Experience authentic flavours, fresh ingridients, and a peaceful dining atmosphere made for memorable moments.
+        </p>
+        <a href="menu" class="btn hero-btn">Explore Our Menu</a>
+      </div>
     </section>
     <section id="menu" class="menu-section">
   <p class="section-label">CULINARY SELECTION</p>
@@ -54,6 +51,7 @@
   <p class="menu-intro">
     Thoughtfully crafted dishes made with fresh ingredients and authentic flavours.
   </p>
+  <p class="menu-hint">Tap any dish to add it to your cart.</p>
   <div class="tabs">
     <button class="tab-button active">Starters</button>
     <button class="tab-button">Main Course</button>
@@ -64,85 +62,98 @@
       
     </ul>
   </div>
-  <div class="tab-content">
+  <div id="mainCourseMenu"  class="tab-content">
     <ul>
-      <li>
-        <div class="dish-info">
-          <span>Paneer Butter Masala</span>
-          <p>Silken paneer in a rich tomato, butter and cream sauce.</p>
-        </div>
-        <strong>₹280</strong>
-      </li>
 
-      <li>
-        <div class="dish-info">
-          <span>Dal Makhani</span>
-          <p>Slow-cooked black lentils finished with butter and cream.</p>
-        </div>
-        <strong>₹220</strong>
-      </li>
-
-      <li>
-        <div class="dish-info">
-          <span>Vegetable Biryani</span>
-          <p>Fragrant basmati rice layered with seasonal vegetables and spices.</p>
-        </div>
-        <strong>₹240</strong>
-      </li>
-
-      <li>
-        <div class="dish-info">
-          <span>Garlic Naan</span>
-          <p>Soft tandoor-baked naan topped with garlic and fresh coriander.</p>
-        </div>
-        <strong>₹80</strong>
-      </li>
     </ul>
   </div>
-
-  
-  <div class="tab-content">
+  <div id="dessertsMenu" class="tab-content">
     <ul>
-      <li>
-        <div class="dish-info">
-          <span>Gulab Jamun</span>
-          <p>Soft milk dumplings served warm in fragrant sugar syrup.</p>
-        </div>
-        <strong>₹120</strong>
-      </li>
-
-      <li>
-        <div class="dish-info">
-          <span>Rasmalai</span>
-          <p>Soft cottage-cheese dumplings soaked in saffron milk.</p>
-        </div>
-        <strong>₹150</strong>
-      </li>
-
-      <li>
-        <div class="dish-info">
-          <span>Kesar Kulfi</span>
-          <p>Traditional saffron-infused Indian ice cream with pistachios.</p>
-        </div>
-        <strong>₹140</strong>
-      </li>
-
-      <li>
-        <div class="dish-info">
-          <span>Chocolate Brownie</span>
-          <p>Rich chocolate brownie with a warm, fudgy centre.</p>
-        </div>
-        <strong>₹180</strong>
-      </li>
+      
     </ul>
   </div>
+  <!-- Floating Cart Button -->
+<button
+    type="button"
+    id="cart-toggle"
+    class="cart-toggle"
+    aria-label="Open your shopping cart"
+    aria-controls="cart-drawer"
+    aria-expanded="false"
+>
+    <span class="cart-toggle-icon" aria-hidden="true">🛒</span>
+    <span class="cart-toggle-label">Your Order</span>
+    <span id="cart-count" class="cart-count">0</span>
+</button>
+
+<!-- Cart Backdrop -->
+<div id="cart-backdrop" class="cart-backdrop" hidden></div>
+
+<!-- Slide-Out Cart Drawer -->
+<aside
+    id="cart-drawer"
+    class="cart-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-title"
+    aria-hidden="true"
+    inert
+>
+    <div class="cart-drawer-header">
+        <div>
+            <p class="cart-eyebrow">ROYAL SPICE</p>
+            <h2 id="cart-title">Your Order</h2>
+            <p class="cart-subtitle">A selection made just for you.</p>
+        </div>
+
+        <button
+            type="button"
+            id="cart-close"
+            class="cart-close"
+            aria-label="Close shopping cart"
+        >&times;</button>
+    </div>
+
+    <div id="cart-items" class="cart-items" aria-live="polite">
+        <p class="cart-empty">Your order is waiting to be created.</p>
+    </div>
+
+    <div class="cart-drawer-footer">
+        <div class="cart-total-row">
+            <span>Subtotal</span>
+            <strong id="cart-total">₹0</strong>
+        </div>
+
+        <p class="cart-note">
+            Final availability and reservation details will be confirmed by the restaurant.
+        </p>
+
+        <button type="button" id="cart-continue" class="cart-continue">
+            Continue to Reservation
+            <span aria-hidden="true">→</span>
+        </button>
+
+        <button type="button" id="cart-keep-browsing" class="cart-keep-browsing">
+            Continue browsing
+        </button>
+    </div>
+</aside>
 </section>
     <section id="booking" class="booking-section">
       <div class="booking-content">
-          <p class="booking-label">RESERVE YOUR TABLE</p>
-          <h2>Book your dining experience</h2>
+          <div class="booking-brand">
+            <span class="booking-brand-icon"></span>
+            <h3>ROYAL SPICE</h3>
+            <span class="booking-brand-subtitle">--INDIAN RESTAURANT--</span>
+          </div>
+          <div class="booking-divider">
+            <span></span>
+            <span>&#10022;</span>
+            <span></span>
+          </div>
+          <h2>Reserve Your Table</h2>
           <p>
-            Reserve your table and enjoy delicious food in a comfortable and welcoming atmosphere.
+            Experience authentic Indian flavours in a warm and elegant atmosphere.
           </p>
       </div>
       <form class="booking-form">
@@ -188,9 +199,21 @@
         >
       </div>
       <button type="submit"  class="btn booking-btn" id="bookingBtn">Book a table</button>
-    </form> 
+    </form>
+    <div class="save-consent" id="saveConsent" hidden>
+      <p> Remember your details for the next time?</p>
+      <p> Save your name and email on this device to make future bookings faster</p>
+      <div class="consent-buttons">
+        <button type="button" id="saveDetails">
+        Yes,remember me
+        </button>
+        <button type="button" id="skipSaving">
+          No, thanks
+        </button>
+      </div>
+    </div> 
     </section>
-    <section class="reviews-section">
+    <section id="reviews" class="reviews-section">
       <p class="reviews-label">WHAT OUR GUESTS SAY</p>
       <h2>customer reviews</h2>
       <div class="reviews-grid">
@@ -204,29 +227,41 @@
     </section>
     <section class="Faq">
       <h2>Frequently Asked Questions</h2>
-      <div class="faq-items">
-        <button class="faq-question">
+      <div class="Faq-items">
+        <button class="Faq-question">
           What are your opening hours?
         </button>
-        <div class="faq-answer">
+        <div class="Faq-answer">
           We are open from 11 AM to 11 PM everyday.
         </div>
       </div>
-      <div class="faq-items">
-        <button class="faq-question">
+      <div class="Faq-items">
+        <button class="Faq-question">
           Do you accept reservations?
         </button>
-      <div class="faq-answer">
+      <div class="Faq-answer">
           Yes, you can reserve a table through our booking section." 
         </div>
       </div>
     </section>
   </main>
-  <footer class="footer">
-    <p>
-      &copy2026 Royal spice Restaurant /all rights reserved
+  <footer class="footer" id="contact">
+  <div class="footer-content">
+    <h2>Royal Spice</h2>
+    <p class="footer-tagline">Authentic Flavours. Unforgettable Experiences.</p>
+
+    <div class="contact-details">
+      <h3>Contact Us</h3>
+      <p><strong>Phone:</strong> <span>+91 8837742728</span></p>
+      <p><strong>Address:</strong> <span>Spice restaurant pathankot.</span></p>
+      <p><strong>Email:</strong> <span>royalspice@email.com</span></p>
+    </div>
+
+    <p class="footer-copyright">
+      &copy; 2026 Royal Spice Restaurant. All rights reserved.
     </p>
-  </footer>
+  </div>
+</footer>
   <div class="modal">
     <div class="modal-content">
       <h2>Booking Started!</h2>
