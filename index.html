@@ -127,6 +127,68 @@
         </button>
     </div>
 </aside>
+<!-- Dish Selection Panel -->
+<div
+    id="dish-selection-modal"
+    class="dish-selection-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="dish-selection-title"
+    hidden
+>
+    <div class="dish-selection-content">
+
+        <button
+            type="button"
+            id="dish-selection-close"
+            class="dish-selection-close"
+            aria-label="Close dish selection"
+        >&times;</button>
+
+        <p class="cart-eyebrow">ROYAL SPICE</p>
+
+        <h2 id="dish-selection-title">Select Your Dish</h2>
+
+        <p id="dish-selection-description"></p>
+
+        <p class="dish-selection-price">
+            Price: <strong id="dish-unit-price">₹0</strong>
+        </p>
+
+        <div class="dish-selection-quantity">
+            <span>Quantity</span>
+
+            <div class="dish-selection-controls">
+                <button
+                    type="button"
+                    id="dish-quantity-minus"
+                    aria-label="Decrease quantity"
+                >−</button>
+
+                <span id="dish-quantity-value">1</span>
+
+                <button
+                    type="button"
+                    id="dish-quantity-plus"
+                    aria-label="Increase quantity"
+                >+</button>
+            </div>
+        </div>
+
+        <p class="dish-selection-total">
+            Total: <strong id="dish-selection-total">₹0</strong>
+        </p>
+
+        <button
+            type="button"
+            id="confirm-add-to-cart"
+            class="confirm-add-to-cart"
+        >
+            Add to Cart
+        </button>
+
+    </div>
+</div>
 </section>
     <section id="booking" class="booking-section">
       <div class="booking-content">
@@ -189,18 +251,38 @@
       </div>
       <button type="submit"  class="btn booking-btn" id="bookingBtn">Book a table</button>
     </form>
-    <div class="save-consent" id="saveConsent" hidden>
-      <p> Remember your details for the next time?</p>
-      <p> Save your name and email on this device to make future bookings faster</p>
-      <div class="consent-buttons">
-        <button type="button" id="saveDetails">
-        Yes,remember me
-        </button>
-        <button type="button" id="skipSaving">
-          No, thanks
-        </button>
-      </div>
-    </div> 
+    <!-- Booking Consent Modal -->
+<div
+  class="consent-modal"
+  id="consentModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-description"
+  hidden
+>
+  <div class="consent-modal-content">
+
+    <p class="cart-eyebrow">ROYAL SPICE</p>
+
+    <h2 id="consent-title">Remember your details?</h2>
+
+    <p id="consent-description">
+      Save your name and email on this device to make future bookings faster.
+    </p>
+
+    <div class="consent-buttons">
+      <button type="button" id="saveDetails">
+        Yes, remember me
+      </button>
+
+      <button type="button" id="skipSaving">
+        No, thanks
+      </button>
+    </div>
+
+  </div>
+</div>
     </section>
     <section id="reviews" class="reviews-section">
       <p class="reviews-label">WHAT OUR GUESTS SAY</p>

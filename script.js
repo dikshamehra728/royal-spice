@@ -14,7 +14,7 @@ const localToday= new Date(
 bookingDate.min=localToday;
 //day 13- browser storage
 const CUSTOMER_KEY="royalSpiceCustomer";
-const saveConsent= document.querySelector("#saveConsent");
+const saveModal = document.querySelector("#consentModal");
 const saveDetailsButton=document.querySelector("#saveDetails");
 console.log("Save button found:", saveDetailsButton);
 const skipSavingButton=document.querySelector("#skipSaving");
@@ -109,22 +109,50 @@ bookingForm.addEventListener("submit",function(event) {
         date: date,
         guests: guests
     };
-    saveConsent.hidden =false
+    consentModal.hidden =false;
+    document.body.style.overflow="hidden";
+    saveDetailsButton.focus();
 });
 // Save customer details only with permission
-saveDetailsButton.addEventListener("click", 
-    function() {
-        if (!pendingBooking) return;
-        saveCustomer(pendingBooking.name, pendingBooking.email);
-        saveConsent.hidden=true;
-        sendBookingToWhatsapp(pendingBooking);
-        pendingBooking=null;
-    });
+// Save customer details only with permission
+saveDetailsButton.addEventListener("click", function () {
+    if (!pendingBooking) {
+        console.error("No pending booking found.");
+        return;
+    }
+
+    saveCustomer(pendingBooking.name, pendingBooking.email);
+
+    consentModal.hidden = true;
+    document.body.style.overflow = "";
+
+    const booking = pendingBooking;
+    pendingBooking = null;
+
+    sendBookingToWhatsapp(booking);
+});
+
+// Continue without saving customer details
+skipSavingButton.addEventListener("click", function () {
+    if (!pendingBooking) {
+        console.error("No pending booking found.");
+        return;
+    }
+
+    consentModal.hidden = true;
+    document.body.style.overflow = "";
+
+    const booking = pendingBooking;
+    pendingBooking = null;
+
+    sendBookingToWhatsapp(booking);
+});
 // continue without saving customer details 
 skipSavingButton.addEventListener("click",
     function() {
        if(!pendingBooking) return;
        saveConsent.hidden=true;
+       document.body.style.overflow="";
        sendBookingToWhatsapp(pendingBooking);
        pendingBooking=null;
     });
@@ -337,6 +365,31 @@ const cartTotal = document.querySelector("#cart-total");
 const cartContinue = document.querySelector("#cart-continue");
 const bookingSection= document.querySelector("#booking");
 const cartKeepBrowsing = document.querySelector("#cart-keep-browsing");
+// Dish selection panel
+const dishSelectionModal = document.querySelector("#dish-selection-modal");
+const dishSelectionClose = document.querySelector("#dish-selection-close");
+dishSelectionModal.addEventListener("click", event => {
+    if (event.target === dishSelectionModal) {
+        closeDishSelection();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (
+        event.key === "Escape" &&
+        !dishSelectionModal.hidden
+    ) {
+        closeDishSelection();
+    }
+});
+const dishSelectionTitle = document.querySelector("#dish-selection-title");
+const dishSelectionDescription = document.querySelector("#dish-selection-description");
+const dishUnitPrice = document.querySelector("#dish-unit-price");
+const dishQuantityValue = document.querySelector("#dish-quantity-value");
+const dishQuantityMinus = document.querySelector("#dish-quantity-minus");
+const dishQuantityPlus = document.querySelector("#dish-quantity-plus");
+const dishSelectionTotal = document.querySelector("#dish-selection-total");
+const confirmAddToCart = document.querySelector("#confirm-add-to-cart");
 cartContinue.addEventListener("click", () => {
     closeCart();
 
@@ -368,6 +421,8 @@ function closeCart() {
     cartToggle.focus();
 }
 
+let selectedDish = null;
+let selectedQuantity = 1;
 function showSelectedDish(dishName) {
     const allMenuItems = [
         ...menuItems,
@@ -375,29 +430,42 @@ function showSelectedDish(dishName) {
         ...dessertItems
     ];
 
-    const selectedDish = allMenuItems.find(
+    selectedDish = allMenuItems.find(
         item => item.name === dishName
     );
 
     if (!selectedDish) return;
 
-    const existingItem = cart.find(
-        item => item.name === selectedDish.name
-    );
+    selectedQuantity = 1;
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            name: selectedDish.name,
-            price: selectedDish.price,
-            quantity: 1
-        });
-    }
+    dishSelectionTitle.textContent = selectedDish.name;
+    dishSelectionDescription.textContent = selectedDish.description;
+    dishUnitPrice.textContent = formatPrice(selectedDish.price);
 
-    renderCart();
+    updateDishSelectionTotal();
+
+    dishSelectionModal.hidden = false;
+    document.body.style.overflow="hidden";
+    dishQuantityPlus.focus();
 }
 
+function updateDishSelectionTotal() {
+    if (!selectedDish) return;
+
+    dishQuantityValue.textContent = selectedQuantity;
+
+    dishSelectionTotal.textContent = formatPrice(
+        selectedDish.price * selectedQuantity
+    );
+}
+
+function closeDishSelection() {
+    dishSelectionModal.hidden = true;
+    document.body.style.overflow="";
+    selectedDish = null;
+    selectedQuantity = 1;
+    cartToggle.focus();
+}
 function renderCart() {
     cartItemsContainer.replaceChildren();
 
@@ -517,7 +585,43 @@ document.addEventListener("keydown", event => {
         closeCart();
     }
 });
+// Dish selection quantity controls
+dishQuantityMinus.addEventListener("click", () => {
+    if (selectedQuantity > 1) {
+        selectedQuantity--;
+        updateDishSelectionTotal();
+    }
+});
 
+dishQuantityPlus.addEventListener("click", () => {
+    if (selectedQuantity < 99) {
+        selectedQuantity++;
+        updateDishSelectionTotal();
+    }
+});
+
+dishSelectionClose.addEventListener("click", closeDishSelection);
+
+confirmAddToCart.addEventListener("click", () => {
+    if (!selectedDish) return;
+
+    const existingItem = cart.find(
+        item => item.name === selectedDish.name
+    );
+
+    if (existingItem) {
+        existingItem.quantity += selectedQuantity;
+    } else {
+        cart.push({
+            name: selectedDish.name,
+            price: selectedDish.price,
+            quantity: selectedQuantity
+        });
+    }
+
+    renderCart();
+    closeDishSelection();
+});
 // Add dishes using event delegation.
 document.querySelector("#menu").addEventListener("click", event => {
     const dishItem = event.target.closest("li[data-dish]");

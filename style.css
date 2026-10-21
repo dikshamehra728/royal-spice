@@ -784,7 +784,7 @@ body.dark h2 {
 .footer {
   background: #2b0b0b;
   color: #f5e6c8;
-  padding: 45px 20px 20px;
+  padding: 28px 20px 14px;
   text-align: center;
 }
 
@@ -795,26 +795,26 @@ body.dark h2 {
 
 .footer-content h2 {
   color: #d4af37;
-  font-size: 2rem;
-  margin-bottom: 8px;
+  font-size: 1.65rem;
+  margin-bottom: 5px;
 }
 
 .footer-tagline {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   color: #e8d8bd;
 }
 
 .contact-details {
-  margin: 0 auto 30px;
+  margin: 0 auto 16px;
 }
 
 .contact-details h3 {
   color: #d4af37;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .contact-details p {
-  margin: 12px 0;
+  margin: 7px 0;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -1148,6 +1148,580 @@ body.dark h2 {
     .cart-drawer,
     .cart-toggle,
     .cart-continue {
+        transition: none;
+    }
+}
+/* =====================================
+   ROYAL SPICE — DISH SELECTION MODAL
+===================================== */
+
+.dish-selection-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    background: rgba(12, 7, 7, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* Respect the HTML hidden attribute */
+.dish-selection-modal[hidden] {
+    display: none;
+}
+
+/* Modal panel */
+.dish-selection-content {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 36px 30px;
+    border: 1px solid #c9a85b;
+    border-radius: 20px;
+
+    background: #241719;
+    color: #f8edd5;
+
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+
+    animation: dishModalAppear 0.22s ease-out;
+}
+
+/* Brand label */
+.dish-selection-content .cart-eyebrow {
+    margin: 0 0 12px;
+    color: #d6b86a;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+/* Dish name */
+.dish-selection-content h2 {
+    margin: 0 25px 18px;
+    color: #f8e8c1;
+    font-size: clamp(25px, 5vw, 34px);
+    line-height: 1.2;
+}
+
+/* Dish description */
+#dish-selection-description {
+    margin: 0 0 22px;
+    color: #e1d5c7;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Unit price */
+.dish-selection-price {
+    margin: 0 0 24px;
+    color: #d8c7a9;
+    font-size: 15px;
+}
+
+#dish-unit-price {
+    color: #f0d58b;
+    font-size: 20px;
+}
+
+/* Quantity row */
+.dish-selection-quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding: 18px 0;
+    border-top: 1px solid rgba(214, 184, 106, 0.25);
+    border-bottom: 1px solid rgba(214, 184, 106, 0.25);
+
+    color: #f8edd5;
+    font-weight: 600;
+}
+
+/* Quantity controls */
+.dish-selection-controls {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.dish-selection-controls button {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #c9a85b;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #f5dfa0;
+
+    font-size: 23px;
+    cursor: pointer;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dish-selection-controls button:hover {
+    background: #d6b86a;
+    color: #241719;
+}
+
+#dish-quantity-value {
+    min-width: 20px;
+    color: #ffffff;
+    font-size: 19px;
+}
+
+/* Total */
+.dish-selection-total {
+    margin: 24px 0;
+    color: #e1d5c7;
+    font-size: 16px;
+}
+
+#dish-selection-total {
+    color: #f0d58b;
+    font-size: 23px;
+}
+
+/* Add to cart */
+.confirm-add-to-cart {
+    width: 100%;
+    min-height: 50px;
+    padding: 14px 20px;
+
+    border: 1px solid #e2c778;
+    border-radius: 10px;
+
+    background: #d6b86a;
+    color: #241719;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.confirm-add-to-cart:hover {
+    background: #f0d58b;
+    transform: translateY(-1px);
+}
+
+/* Close button */
+.dish-selection-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+
+    display: grid;
+    place-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(214, 184, 106, 0.4);
+    border-radius: 50%;
+
+    background: transparent;
+    color: #f8edd5;
+
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.dish-selection-close:hover {
+    background: rgba(214, 184, 106, 0.15);
+}
+
+/* Entrance animation */
+@keyframes dishModalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+    .dish-selection-modal {
+        padding: 14px;
+    }
+
+    .dish-selection-content {
+        padding: 32px 22px 24px;
+        border-radius: 16px;
+    }
+
+    .dish-selection-quantity {
+        gap: 10px;
+    }
+
+    .dish-selection-controls {
+        gap: 14px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .dish-selection-content {
+        animation: none;
+    }
+
+    .dish-selection-controls button,
+    .confirm-add-to-cart {
+        transition: none;
+    }
+}
+/* =========================================
+   ROYAL SPICE — PREMIUM CART ITEM LAYOUT
+========================================= */
+
+/* Cart item list */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Individual item */
+.cart-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(214, 184, 106, 0.25);
+}
+
+/* Dish details */
+.cart-item-details {
+    min-width: 0;
+}
+
+.cart-item-name {
+    margin: 0 0 7px;
+    color: #f8edd5;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.cart-item-price {
+    margin: 0;
+    color: #c8bba7;
+    font-size: 13px;
+}
+
+/* Quantity controls */
+.cart-quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cart-quantity-controls button {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    border: 1px solid #b99a54;
+    border-radius: 50%;
+
+    background: transparent;
+    color: #f0d58b;
+
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cart-quantity-controls button:hover {
+    background: #d6b86a;
+    color: #241719;
+}
+
+.cart-quantity-controls span {
+    min-width: 18px;
+    color: #fff5e2;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Item subtotal */
+.cart-item-total {
+    grid-column: 2;
+    justify-self: end;
+
+    color: #f0d58b;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Empty cart message */
+.cart-empty {
+    padding: 28px 12px;
+    color: #c8bba7;
+    font-size: 14px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* Cart subtotal */
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding: 16px 0;
+    border-top: 1px solid rgba(214, 184, 106, 0.4);
+
+    color: #f8edd5;
+    font-size: 15px;
+}
+
+.cart-total-row strong {
+    color: #f0d58b;
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+/* Responsive cart layout */
+@media (max-width: 400px) {
+    .cart-item {
+        gap: 10px;
+        padding: 16px 0;
+    }
+
+    .cart-item-name {
+        font-size: 14px;
+    }
+
+    .cart-quantity-controls {
+        gap: 7px;
+    }
+
+    .cart-quantity-controls button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .cart-item-total {
+        font-size: 14px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .cart-quantity-controls button {
+        transition: none;
+    }
+}
+/* =====================================
+   ROYAL SPICE — CART TEXT CONTRAST
+===================================== */
+
+/* Dish names */
+.cart-item-name {
+    color: #321719;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* Individual dish price */
+.cart-item-price {
+    color: #514044;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Quantity number */
+.cart-quantity-controls span {
+    color: #321719;
+    font-weight: 700;
+}
+
+/* Individual item subtotal */
+.cart-item-total {
+    color: #76551b;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Quantity buttons */
+.cart-quantity-controls button {
+    border-color: #98742e;
+    color: #76551b;
+    font-weight: 700;
+}
+
+/* Cart subtotal label */
+.cart-total-row {
+    color: #321719;
+    font-weight: 600;
+}
+
+/* Cart subtotal amount */
+.cart-total-row strong {
+    color: #76551b;
+    font-weight: 800;
+}
+
+/* Supporting text */
+.cart-subtitle,
+.cart-note,
+.cart-empty {
+    color: #514044;
+}
+
+/* Close button */
+.cart-close {
+    color: #321719;
+}
+/* =====================================
+   BOOKING CONSENT — CENTERED MODAL
+===================================== */
+
+.consent-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 8, 8, 0.78);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.consent-modal[hidden] {
+    display: none;
+}
+
+.consent-modal-content {
+    position: relative;
+    width: min(100%, 520px);
+    padding: 38px 32px;
+    border: 1px solid #d4af69;
+    border-radius: 22px;
+    background: #211516;
+    color: #f8edda;
+    text-align: center;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+    animation: consentModalAppear 0.25s ease-out;
+}
+
+.consent-modal-content .cart-eyebrow {
+    margin: 0 0 14px;
+    color: #e0c27d;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.consent-modal-content h2 {
+    margin: 0 0 16px;
+    color: #f8edda;
+    font-size: clamp(24px, 5vw, 32px);
+    line-height: 1.25;
+}
+
+.consent-modal-content > p:not(.cart-eyebrow) {
+    margin: 0 0 28px;
+    color: #e2d5c8;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.consent-modal-content .consent-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.consent-modal-content .consent-buttons button {
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 1px solid #d4af69;
+    border-radius: 10px;
+    background: #f8edda;
+    color: #39201b;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.consent-modal-content .consent-buttons button:hover {
+    background: #e6c77f;
+    transform: translateY(-2px);
+}
+
+.consent-modal-content .consent-buttons button:focus-visible {
+    outline: 3px solid #e6c77f;
+    outline-offset: 4px;
+}
+
+@keyframes consentModalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .consent-modal-content {
+        padding: 30px 20px;
+    }
+
+    .consent-modal-content .consent-buttons {
+        flex-direction: column;
+    }
+
+    .consent-modal-content .consent-buttons button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .consent-modal-content {
+        animation: none;
+    }
+
+    .consent-modal-content .consent-buttons button {
         transition: none;
     }
 }
